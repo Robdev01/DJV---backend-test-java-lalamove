@@ -31,11 +31,24 @@
 @SET __MVNW_CMD__=
 @SET __MVNW_ERROR__=
 @SET __MVNW_PSMODULEP_SAVE=%PSModulePath%
+@SET __MVNW_PWSH__=powershell
+@WHERE powershell >NUL 2>NUL
+@IF ERRORLEVEL 1 (
+  @WHERE pwsh >NUL 2>NUL
+  @IF ERRORLEVEL 1 (
+    @IF EXIST "%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" (
+      @SET __MVNW_PWSH__=%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe
+    )
+  ) ELSE (
+    @SET __MVNW_PWSH__=pwsh
+  )
+)
 @SET PSModulePath=
-@FOR /F "usebackq tokens=1* delims==" %%A IN (`powershell -noprofile "& {$scriptDir='%~dp0'; $script='%__MVNW_ARG0_NAME__%'; icm -ScriptBlock ([Scriptblock]::Create((Get-Content -Raw '%~f0'))) -NoNewScope}"`) DO @(
+@FOR /F "usebackq tokens=1* delims==" %%A IN (`%__MVNW_PWSH__% -noprofile "& {$scriptDir='%~dp0'; $script='%__MVNW_ARG0_NAME__%'; icm -ScriptBlock ([Scriptblock]::Create((Get-Content -Raw '%~f0'))) -NoNewScope}"`) DO @(
   IF "%%A"=="MVN_CMD" (set __MVNW_CMD__=%%B) ELSE IF "%%B"=="" (echo %%A) ELSE (echo %%A=%%B)
 )
 @SET PSModulePath=%__MVNW_PSMODULEP_SAVE%
+@SET __MVNW_PWSH__=
 @SET __MVNW_PSMODULEP_SAVE=
 @SET __MVNW_ARG0_NAME__=
 @SET MVNW_USERNAME=

@@ -2,25 +2,35 @@ package com.desafioLalamove.delivery.dto;
 
 import java.util.List;
 
+/**
+ * DTO usado para receber os dados de criacao de pedido.
+ *
+ * DTO significa Data Transfer Object.
+ * Ele representa o formato do JSON recebido pela API.
+ */
 public class CreateOrderRequest {
+    // Origem no formato [latitude, longitude].
+    private List<String> origin;
 
-        private List<String> origin;
-        private List<String> destination;
+    // Destino no formato [latitude, longitude].
+    private List<String> destination;
 
-        public List<String> getOrigin() {
-            return origin;
-        }
+    // Getters e setters sao usados pelo Jackson para montar o objeto a partir do JSON.
 
-        public void setOrigin(List<String> origin) {
-            this.origin = origin;
-        }
+    public List<String> getOrigin() {
+        return origin;
+    }
 
-        public List<String> getDestination() {
-            return destination;
-        }
+    public void setOrigin(List<String> origin) {
+        this.origin = origin;
+    }
 
-        public void setDestination(List<String> destination) {
-            this.destination = destination;
-        }
+    public List<String> getDestination() {
+        return destination;
+    }
+
+    public void setDestination(List<String> destination) {
+        this.destination = destination;
+    }
 
 }
